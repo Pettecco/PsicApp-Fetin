@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>376343754528-4mtckrmbcbduphkkgnl3l0nrkq8cg4vr.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.376343754528-4mtckrmbcbduphkkgnl3l0nrkq8cg4vr</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDT5vCr0qlw2N_Fq7RAcytL86elpT-RqI0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>376343754528</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.psciapp</string>
+	<key>PROJECT_ID</key>
+	<string>psicapp-45e46</string>
+	<key>STORAGE_BUCKET</key>
+	<string>psicapp-45e46.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:376343754528:ios:e2d912bf9ed5c8a86a4945</string>
+</dict>
+</plist>

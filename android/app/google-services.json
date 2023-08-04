@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "376343754528",
+    "project_id": "psicapp-45e46",
+    "storage_bucket": "psicapp-45e46.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:376343754528:android:c7101075e4020dab6a4945",
+        "android_client_info": {
+          "package_name": "com.example.psciapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "376343754528-1uep5k9qv58dq7pk820nd7iq7tgmg0ln.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjPDeVH8BD1IswVWNfnBNU9wrdz9tH6Ik"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "376343754528-1uep5k9qv58dq7pk820nd7iq7tgmg0ln.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
