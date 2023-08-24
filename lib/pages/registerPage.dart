@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:psciapp/services/auth_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -13,6 +14,7 @@ class _RegisterPage extends State<RegisterPage> {
   final formKey = GlobalKey<FormState>();
   final email = TextEditingController();
   final senha = TextEditingController();
+  final confirmSenha = TextEditingController();
   bool? valid = false;
 
   registrar() async {
@@ -37,7 +39,7 @@ class _RegisterPage extends State<RegisterPage> {
       ),
       body: Container(
           padding: const EdgeInsets.only(
-            top: 0,
+            top: 20,
             left: 40,
             right: 40,
             bottom: 10,
@@ -51,34 +53,8 @@ class _RegisterPage extends State<RegisterPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Nome',
-                      style: TextStyle(color: Color(0XFF66626F), fontSize: 16),
-                    ),
-                  ),
                   const SizedBox(
                     height: 10,
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(7),
-                      color: Colors.white,
-                    ),
-                    child: TextFormField(
-                      autofocus: false,
-                      keyboardType: TextInputType.emailAddress,
-                      style: const TextStyle(fontSize: 20),
-                      decoration: const InputDecoration(
-                        prefixIcon: Icon(
-                          IconData(0xf521, fontFamily: 'MaterialIcons'),
-                          color: Colors.black26,
-                        ),
-                        hintText: 'Insira seu nome',
-                        hintStyle: TextStyle(fontSize: 16),
-                      ),
-                    ),
                   ),
                   const SizedBox(
                     height: 10,
@@ -120,10 +96,7 @@ class _RegisterPage extends State<RegisterPage> {
                     ),
                   ),
                   const SizedBox(
-                    height: 10,
-                  ),
-                  const SizedBox(
-                    height: 10,
+                    height: 25,
                   ),
                   const Align(
                     alignment: Alignment.centerLeft,
@@ -165,15 +138,12 @@ class _RegisterPage extends State<RegisterPage> {
                     ),
                   ),
                   const SizedBox(
-                    height: 10,
-                  ),
-                  const SizedBox(
-                    height: 10,
+                    height: 25,
                   ),
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      'E-mail da(o) sua psicóloga(o)',
+                      'Confime sua senha',
                       style: TextStyle(color: Color(0XFF66626F), fontSize: 16),
                     ),
                   ),
@@ -186,15 +156,27 @@ class _RegisterPage extends State<RegisterPage> {
                       color: Colors.white,
                     ),
                     child: TextFormField(
+                      controller: confirmSenha,
                       autofocus: false,
-                      keyboardType: TextInputType.emailAddress,
+                      obscureText: true,
+                      keyboardType: TextInputType.visiblePassword,
                       style: const TextStyle(fontSize: 20),
+                      validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Senha obrigatória';
+                        } else if (value.length < 6) {
+                          return 'Sua senha deve ter no mínimo 6 caracteres!';
+                        } else if(value != senha.text){
+                          return 'As senhas devem ser iguais!';
+                        }
+                        return null;
+                      },
                       decoration: const InputDecoration(
                         prefixIcon: Icon(
-                          IconData(0xe22a, fontFamily: 'MaterialIcons'),
+                          IconData(0xe3ae, fontFamily: 'MaterialIcons'),
                           color: Colors.black26,
                         ),
-                        hintText: 'Insira o e-mail',
+                        hintText: 'Digite sua senha',
                         hintStyle: TextStyle(fontSize: 16),
                       ),
                     ),
@@ -212,7 +194,9 @@ class _RegisterPage extends State<RegisterPage> {
                               registrar();
                               Navigator.of(context).pushNamed('/login');
                               ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Registro concluído com sucesso!')));
+                                  const SnackBar(
+                                      content: Text(
+                                          'Registro concluído com sucesso!')));
                             }
                           },
                           style: const ButtonStyle(

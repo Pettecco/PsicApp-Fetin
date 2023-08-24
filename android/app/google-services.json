@@ -29,6 +29,13 @@
             {
               "client_id": "376343754528-1uep5k9qv58dq7pk820nd7iq7tgmg0ln.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "376343754528-4mtckrmbcbduphkkgnl3l0nrkq8cg4vr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.psciapp"
+              }
             }
           ]
         }

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:psciapp/services/auth_service.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:uuid/uuid.dart';
 
 class QuestionPage extends StatefulWidget {
   const QuestionPage({super.key});
@@ -17,6 +21,12 @@ class _QuestionPageState extends State<QuestionPage> {
   final pontoAlto = TextEditingController();
   final pontoBaixo = TextEditingController();
   bool? valid = false;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  // pegando o ID do usuário logado
+  final user = FirebaseAuth.instance.currentUser?.uid;
+  // pegando a data do dia em que o formulário foi respondido
+  String data = DateFormat.MEd().format(DateTime.now());
+  var id = const Uuid();
   // This widget is the root of yout application.
   @override
   Widget build(BuildContext context) {
@@ -240,8 +250,29 @@ class _QuestionPageState extends State<QuestionPage> {
                     child: ButtonTheme(
                       child: ElevatedButton(
                         onPressed: () {
+                          String humor = "Apático";
+                            if (emotion == Emotion.contente) {
+                              humor = "Contente";
+                            } else if (emotion == Emotion.chateado) {
+                              humor = "Chateado";
+                            } else if (emotion == Emotion.apatico) {
+                              humor = "Apático";
+                            } else if (emotion == Emotion.feliz) {
+                              humor = "Feliz";
+                            } else if (emotion == Emotion.triste) {
+                              humor = "Triste";
+                            }
                           valid = formKey.currentState?.validate();
                           if (valid == true) {
+                            firestore
+                                .collection("users")
+                                .doc(user).collection("Formulários").doc(id.v1())
+                                .set({
+                              "Ponto alto": pontoAlto.text,
+                              "Ponto baixo": pontoBaixo.text,
+                              "Humor": humor,
+                              "Dia": data,
+                            });
                             context.read<AuthService>().logout();
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(

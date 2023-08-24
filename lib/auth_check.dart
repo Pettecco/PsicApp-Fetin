@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:psciapp/pages/loginPage.dart';
-import 'package:psciapp/pages/questionPage.dart';
 import 'package:psciapp/services/auth_service.dart';
 import 'package:provider/provider.dart';
+import 'package:psciapp/pages/questionPage.dart';
 
 class AuthCheck extends StatefulWidget {
   const AuthCheck({Key? key}) : super(key: key);
