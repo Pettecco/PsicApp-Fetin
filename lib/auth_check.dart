@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:psciapp/pages/loginPage.dart';
+import 'package:psciapp/pages/home_page.dart';
+import 'package:psciapp/pages/login_page.dart';
 import 'package:psciapp/services/auth_service.dart';
 import 'package:provider/provider.dart';
-import 'package:psciapp/pages/questionPage.dart';
 
 class AuthCheck extends StatefulWidget {
   const AuthCheck({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class _AuthCheckState extends State<AuthCheck> {
     } else if (auth.usuario == null) {
       return const LoginPage();
     } else {
-      return const QuestionPage();
+      return const HomePage();
     }
   }
 

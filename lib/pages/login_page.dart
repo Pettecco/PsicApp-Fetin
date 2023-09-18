@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:psciapp/services/auth_service.dart';
+import 'package:psciapp/models/remeberMe.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -129,14 +130,11 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Container(
                       alignment: Alignment.centerLeft,
-                      child: Row(
+                      child: const Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Checkbox(
-                              value: true,
-                              onChanged: (value) => value!,
-                          ),
-                          const Text(
+                          RememberMe(),
+                          Text(
                             'Lembre-se de mim',
                             style: TextStyle(fontSize: 15),
                           ),
