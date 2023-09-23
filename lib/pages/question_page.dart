@@ -16,9 +16,6 @@ class QuestionPage extends StatefulWidget {
 enum Emotion { triste, chateado, apatico, contente, feliz }
 
 class _QuestionPageState extends State<QuestionPage> {
-
-  String data = DateFormat.MEd().format(DateTime.now());
-
   Emotion? emotion = Emotion.apatico;
   final formKey = GlobalKey<FormState>();
   final pontoAlto = TextEditingController();
@@ -28,7 +25,7 @@ class _QuestionPageState extends State<QuestionPage> {
   // pegando o ID do usuário logado
   final user = FirebaseAuth.instance.currentUser?.uid;
   // pegando a data do dia em que o formulário foi respondido
-
+  String data = DateFormat.MEd().format(DateTime.now());
   var id = const Uuid();
   // This widget is the root of yout application.
   @override
@@ -163,7 +160,7 @@ class _QuestionPageState extends State<QuestionPage> {
                 const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('Cite pelo menos um ponto alto do seu dia:',
+                    Text('Cite, pelo menos um ponto alto do seu dia:',
                         style:
                             TextStyle(color: Color(0XFF66626F), fontSize: 16)),
                   ],
@@ -265,16 +262,12 @@ class _QuestionPageState extends State<QuestionPage> {
                           } else if (emotion == Emotion.triste) {
                             humor = "Triste";
                           }
-                          if(pontoBaixo.text == "")
-                          {
-                            pontoBaixo.text = "nenhum ponto baixo registrado";
-                          }
                           valid = formKey.currentState?.validate();
                           if (valid == true) {
                             firestore
                                 .collection("users")
                                 .doc(user)
-                                .collection("Formulários")
+                                .collection("Formularios")
                                 .doc(id.v1())
                                 .set({
                               "Ponto alto": pontoAlto.text,
@@ -282,12 +275,10 @@ class _QuestionPageState extends State<QuestionPage> {
                               "Humor": humor,
                               "Dia": data,
                             });
-                            context.read<AuthService>().logout();
-                            Navigator.of(context).pushNamed('/login');
+                            Navigator.of(context).pushNamed('/confirmForm');
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text('Formulário enviado!')));
-                                    
                           }
                         },
                         style: const ButtonStyle(
