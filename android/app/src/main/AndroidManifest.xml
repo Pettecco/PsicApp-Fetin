@@ -2,7 +2,7 @@
     <application
         android:label="PsicApp"
         android:name="${applicationName}"
-        android:icon="@mipmap/psicapplogo">
+        android:icon="@mipmap/iconpsic">
         <activity
             android:name=".MainActivity"
             android:exported="true"

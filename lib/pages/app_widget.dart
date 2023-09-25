@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:psciapp/auth_check.dart';
-import 'package:psciapp/pages/confirm_page.dart';
 import 'package:psciapp/pages/forgot_password.dart';
 import 'package:psciapp/pages/login_page.dart';
 import 'package:psciapp/pages/question_page.dart';
@@ -23,7 +22,6 @@ class AppWidget extends StatelessWidget {
         '/register': (context) => const RegisterPage(),
         '/forgotPassword':(context) => const ForgotPassword(),
         '/questionPage':(context) => const QuestionPage(),
-        '/confirmForm':(context) => const ConfirmForm(),
       },
     );
   }

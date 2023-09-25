@@ -13,19 +13,34 @@ class QuestionPage extends StatefulWidget {
   State<QuestionPage> createState() => _QuestionPageState();
 }
 
+FirebaseFirestore firestore = FirebaseFirestore.instance;
+final useremail = FirebaseAuth.instance.currentUser?.email;
+
 enum Emotion { triste, chateado, apatico, contente, feliz }
+
+sendEmail(String sendEmailTo, String humor, String pontoAlto, String pontoBaixo,
+    String data) async {
+  await firestore.collection("mail").add({
+    'to': " $sendEmailTo",
+    'message': {
+      'subject': "Questionário de $useremail",
+      'html':
+          "<p><h4>Respostas do questionário do dia $data<h4></p><p><b>Ponto alto</b>:$pontoAlto<br><b>Ponto Baixo</b>: $pontoBaixo<br><b>Humor</b>: $humor</p>"
+    }
+  });
+}
 
 class _QuestionPageState extends State<QuestionPage> {
   Emotion? emotion = Emotion.apatico;
   final formKey = GlobalKey<FormState>();
   final pontoAlto = TextEditingController();
   final pontoBaixo = TextEditingController();
+  final email = TextEditingController();
   bool? valid = false;
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
   // pegando o ID do usuário logado
   final user = FirebaseAuth.instance.currentUser?.uid;
   // pegando a data do dia em que o formulário foi respondido
-  String data = DateFormat.MEd().format(DateTime.now());
+  String data = DateFormat.Md().format(DateTime.now());
   var id = const Uuid();
   // This widget is the root of yout application.
   @override
@@ -42,7 +57,7 @@ class _QuestionPageState extends State<QuestionPage> {
       ),
       body: Container(
         padding: const EdgeInsets.only(
-          top: 40,
+          top: 15,
           left: 15,
           right: 15,
           bottom: 10,
@@ -169,7 +184,7 @@ class _QuestionPageState extends State<QuestionPage> {
                   height: 20,
                 ),
                 Container(
-                  height: 100,
+                  height: 80,
                   decoration: BoxDecoration(
                     boxShadow: const [
                       BoxShadow(
@@ -216,7 +231,7 @@ class _QuestionPageState extends State<QuestionPage> {
                   height: 20,
                 ),
                 Container(
-                  height: 100,
+                  height: 80,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(7),
                     color: const Color(0xFFFFBFA8),
@@ -243,7 +258,54 @@ class _QuestionPageState extends State<QuestionPage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 20,
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Insira o e-mail da(o) psicóloga(o):',
+                        style:
+                            TextStyle(color: Color(0XFF66626F), fontSize: 16)),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  height: 70,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(7),
+                    color: const Color(0xFFFFBFA8),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: Color(0XFF66626F),
+                        spreadRadius: 0.5,
+                        blurRadius: 5,
+                        offset: Offset(0, 3),
+                      )
+                    ],
+                  ),
+                  child: TextFormField(
+                    textAlign: TextAlign.center,
+                    decoration: const InputDecoration(
+                      border: InputBorder.none,
+                    ),
+                    maxLines: 10,
+                    autofocus: false,
+                    keyboardType: TextInputType.emailAddress,
+                    style: const TextStyle(
+                        fontSize: 15, color: Color.fromARGB(255, 42, 40, 46)),
+                    controller: email,
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Este campo é obrigatório.';
+                      }
+                      return null;
+                    }
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 SizedBox(
                     height: 60,
@@ -262,6 +324,10 @@ class _QuestionPageState extends State<QuestionPage> {
                           } else if (emotion == Emotion.triste) {
                             humor = "Triste";
                           }
+                          if(pontoBaixo.text.isEmpty)
+                          {
+                            pontoBaixo.text = 'nenhuma informação fornecida pelo usuário';
+                          }
                           valid = formKey.currentState?.validate();
                           if (valid == true) {
                             firestore
@@ -275,7 +341,9 @@ class _QuestionPageState extends State<QuestionPage> {
                               "Humor": humor,
                               "Dia": data,
                             });
-                            Navigator.of(context).pushNamed('/confirmForm');
+                            sendEmail(email.text, humor,
+                                pontoAlto.text, pontoBaixo.text, data);
+                            context.read<AuthService>().logout();
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                     content: Text('Formulário enviado!')));
