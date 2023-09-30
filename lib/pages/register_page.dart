@@ -191,7 +191,7 @@ class _RegisterPage extends State<RegisterPage> {
                             valid = formKey.currentState?.validate();
                             if (valid == true) {
                               registrar();
-                              Navigator.of(context).pushNamed('/login');
+                              Navigator.of(context).pop();
                               ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
                                       content: Text(
