@@ -20,7 +20,6 @@ Esse projeto surgiu com o intuito de ajudar pacientes a estruturar melhor suas i
     <div>
        <img src="assets/loginPage.jpg" width="300">
        <img src="assets/registerPage.jpg" width="300">
-        <img src="assets/confirmRegister.jpg" width="300">
        <img src="assets/formPage.jpg" width="300">
     </div>
   </div>
