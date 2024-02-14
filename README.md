@@ -1,16 +1,27 @@
-# psciapp
+# PsicApp
 
-A new Flutter project.
+Projeto feito para a Feira tecnológica do Inatel - Fetin 2023.
 
-## Getting Started
+## Aplicativo para auxílio de consultas com psicólogos
 
-This project is a starting point for a Flutter application.
+Esse projeto surgiu com o intuito de ajudar pacientes a estruturar melhor suas ideias/acontecimentos para contar a seu psicólogo, esse que por sua vez terá as análises de sintomas (e outras demandas) potencializadas.
 
-A few resources to get you started if this is your first Flutter project:
+<p>A ideia desse aplicativo (com suporte para Android e IOS) é que todos os dias o usuário responda um questionário sobre os pontos altos, humor e pontos baixos de seu dia. As respostas são salvas no banco de dados e através de Cloud Fuctions são enviadas imediatamente para o email do profissional responsável pelo antedimento.</p>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+<p>Para o desenvolvimento do projeto utilizamos como principais tecnologias:</p>
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [Flutter](https://flutter.dev/)
+- [Firebase](https://firebase.google.com/?hl=pt)
+- [Twilio SendGrid API](https://docs.sendgrid.com/pt-br/)
+
+  <p>Para que o paciente seja identificado pelo psicólogo e para que os dados sejam salvos de forma segura foi necessário um sistema de autencitação (Login/Cadastro). Após autenticado o usuário já é redirecionado para a página do questionário.</p>
+
+  <div>
+    <div>
+       <img src="assets/loginPage.jpg" width="300">
+       <img src="assets/registerPage.jpg" width="300">
+       <img src="assets/formPage.jpg" width="300">
+    </div>
+  </div>
+
+  <p>Para mais informações e dowload do aplicativo clique aqui: <a href="https://anagvaleta.github.io/psicapp/">PsicApp</a></p>
